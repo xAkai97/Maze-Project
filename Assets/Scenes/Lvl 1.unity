@@ -122,6 +122,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &47827513 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3458883510593967827, guid: 17acc80464530864e8da3705ecd50cca, type: 3}
+  m_PrefabInstance: {fileID: 1244954908045275063}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &141752495
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,6 +242,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &203742349
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 203742351}
+  - component: {fileID: 203742350}
+  m_Layer: 0
+  m_Name: RespawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &203742350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203742349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0468e40555f7b8f43a42ece0c48ac7d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnAreaCenter: {x: -10, y: -11}
+  respawnAreaRadius: 2
+  enemyPrefabs:
+  - {fileID: 1897920560}
+  - {fileID: 47827513}
+  - {fileID: 384471773}
+--- !u!4 &203742351
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203742349}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -10, y: -11, z: 9.486483}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &320086965
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,6 +394,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &384471773 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7335616289284250143, guid: c023fc2897ffe494293e513a603efb77, type: 3}
+  m_PrefabInstance: {fileID: 3404378848135310700}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -19395,6 +19455,7 @@ MonoBehaviour:
   chest: {fileID: 1876565134}
   winText: {fileID: 681834470}
   endGameDelay: 3
+  respawnManager: {fileID: 203742350}
 --- !u!4 &1371584502
 Transform:
   m_ObjectHideFlags: 0
@@ -28310,6 +28371,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2055102311959635375, guid: 99597c7b4aa47494fb2b6061505735da, type: 3}
   m_PrefabInstance: {fileID: 802592105}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1897920560 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7493396235363177299, guid: fc922ee6d1789524496b20117672fef4, type: 3}
+  m_PrefabInstance: {fileID: 8981601051042019925}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1244954908045275063
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28331,8 +28397,8 @@ PrefabInstance:
       value: Enemy 2
       objectReference: {fileID: 0}
     - target: {fileID: 3458883510593967827, guid: 17acc80464530864e8da3705ecd50cca, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4483328951124012235, guid: 17acc80464530864e8da3705ecd50cca, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28344,7 +28410,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4483328951124012235, guid: 17acc80464530864e8da3705ecd50cca, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.05202481
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4483328951124012235, guid: 17acc80464530864e8da3705ecd50cca, type: 3}
       propertyPath: m_LocalRotation.w
@@ -28374,10 +28440,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6566742485992395123, guid: 17acc80464530864e8da3705ecd50cca, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28401,10 +28463,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5053050487158632024, guid: c023fc2897ffe494293e513a603efb77, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 7095666450089525284, guid: c023fc2897ffe494293e513a603efb77, type: 3}
       propertyPath: m_LocalPosition.x
       value: -26.9
@@ -28415,7 +28473,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7095666450089525284, guid: c023fc2897ffe494293e513a603efb77, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.05202481
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7095666450089525284, guid: c023fc2897ffe494293e513a603efb77, type: 3}
       propertyPath: m_LocalRotation.w
@@ -28450,8 +28508,8 @@ PrefabInstance:
       value: Enemy 3
       objectReference: {fileID: 0}
     - target: {fileID: 7335616289284250143, guid: c023fc2897ffe494293e513a603efb77, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8138859088659634274, guid: c023fc2897ffe494293e513a603efb77, type: 3}
       propertyPath: chest
@@ -28552,25 +28610,33 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 635174772}
+    - target: {fileID: 5944895356706683875, guid: fc922ee6d1789524496b20117672fef4, type: 3}
+      propertyPath: respawnAreaCenter.x
+      value: 3.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 5944895356706683875, guid: fc922ee6d1789524496b20117672fef4, type: 3}
+      propertyPath: respawnAreaCenter.y
+      value: 3.81
+      objectReference: {fileID: 0}
     - target: {fileID: 7493396235363177299, guid: fc922ee6d1789524496b20117672fef4, type: 3}
       propertyPath: m_Name
       value: Enemy 1
       objectReference: {fileID: 0}
     - target: {fileID: 7493396235363177299, guid: fc922ee6d1789524496b20117672fef4, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8545316436522150995, guid: fc922ee6d1789524496b20117672fef4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.57
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8545316436522150995, guid: fc922ee6d1789524496b20117672fef4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.47
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8545316436522150995, guid: fc922ee6d1789524496b20117672fef4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.05202481
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8545316436522150995, guid: fc922ee6d1789524496b20117672fef4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -28600,10 +28666,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8655649024699011433, guid: fc922ee6d1789524496b20117672fef4, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28614,6 +28676,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
+  - {fileID: 320086969}
   - {fileID: 141752497}
   - {fileID: 802592105}
   - {fileID: 7240697504741076616}
@@ -28621,5 +28684,5 @@ SceneRoots:
   - {fileID: 1244954908045275063}
   - {fileID: 3404378848135310700}
   - {fileID: 1371584502}
+  - {fileID: 203742351}
   - {fileID: 203248102}
-  - {fileID: 320086969}

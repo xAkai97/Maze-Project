@@ -5,28 +5,32 @@ public class EnemyController : MonoBehaviour
 {
     public float maxSpeed = 5f; // Maximum normal movement speed
     public float satisfactionRadius = 0.5f; // Radius to consider "arrived"
-    public float avoidRadius = 3f; // Radius to detect and avoid obstacles
     public float smoothTurnSpeed = 5f; // Speed for smooth rotation
     public float walkSpeed = 3f; // Base speed for movement
-    public float obstacleAvoidanceStrength = 1.5f; // Strength of the avoidance force
     public float detectionRadius = 10f; // Radius to detect the player
     public Transform player; // Reference to the player
     public Transform chest; // Reference to the chest
     public float respawnDelay = 5f; // Delay before respawning the enemy
-    public Vector2 respawnAreaMin; // Minimum coordinates for respawn area
-    public Vector2 respawnAreaMax; // Maximum coordinates for respawn area
 
     private Vector2 destination; // The target position for the enemy
     private bool isMoving = false; // Indicates whether the enemy is currently moving
     private Pathfinding pathfinding;
     private List<Vector2> path;
     private int pathIndex;
-    private GridGenerator gridGenerator;
+    private RespawnManager respawnManager;
 
     void Start()
     {
         pathfinding = FindObjectOfType<Pathfinding>();
-        gridGenerator = FindObjectOfType<GridGenerator>();
+        respawnManager = FindObjectOfType<RespawnManager>();
+        if (respawnManager == null)
+        {
+            Debug.LogError("RespawnManager not found in the scene.");
+        }
+        else
+        {
+            Debug.Log("RespawnManager successfully initialized.");
+        }
     }
 
     void Update()
@@ -80,21 +84,7 @@ public class EnemyController : MonoBehaviour
 
         directionToTarget.Normalize();
 
-        // Detect nearby obstacles
-        Vector2 avoidanceForce = Vector2.zero;
-        Collider2D[] nearbyObstacles = Physics2D.OverlapCircleAll(currentPosition, avoidRadius);
-        foreach (Collider2D obstacle in nearbyObstacles)
-        {
-            if (obstacle.CompareTag("Obstacle"))
-            {
-                Vector2 obstacleDirection = currentPosition - (Vector2)obstacle.transform.position;
-                float obstacleDistance = obstacleDirection.magnitude;
-                float avoidanceStrength = Mathf.Clamp01(1 - (obstacleDistance / avoidRadius));
-                avoidanceForce += obstacleDirection.normalized * avoidanceStrength * obstacleAvoidanceStrength;
-            }
-        }
-
-        Vector2 finalDirection = (directionToTarget + avoidanceForce).normalized;
+        Vector2 finalDirection = directionToTarget;
 
         float angle = Mathf.Atan2(finalDirection.y, finalDirection.x) * Mathf.Rad2Deg;
         Quaternion targetRotation = Quaternion.Euler(0, 0, angle - 90);
@@ -134,18 +124,8 @@ public class EnemyController : MonoBehaviour
 
     void RespawnEnemy()
     {
-        Vector2 respawnPosition;
-        int attempts = 0;
-        do
-        {
-            respawnPosition = new Vector2(
-                Random.Range(respawnAreaMin.x, respawnAreaMax.x),
-                Random.Range(respawnAreaMin.y, respawnAreaMax.y)
-            );
-            attempts++;
-        } while (!IsValidRespawnPosition(respawnPosition) && attempts < 20);
-
-        if (IsValidRespawnPosition(respawnPosition))
+        Vector2 respawnPosition = respawnManager.GetValidRespawnPosition();
+        if (respawnPosition != Vector2.zero)
         {
             transform.position = respawnPosition;
             gameObject.SetActive(true);
@@ -155,23 +135,5 @@ public class EnemyController : MonoBehaviour
         {
             Debug.LogWarning("Failed to find a valid respawn position after multiple attempts.");
         }
-    }
-
-    bool IsValidRespawnPosition(Vector2 position)
-    {
-        Vector2 roundedPosition = new Vector2(Mathf.Round(position.x), Mathf.Round(position.y));
-        if (gridGenerator.GetCells().TryGetValue(roundedPosition, out Cell cell) && !cell.isWall)
-        {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(roundedPosition, 0.1f);
-            foreach (Collider2D collider in colliders)
-            {
-                if (collider.CompareTag("Wall") || collider.CompareTag("Obstacle"))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }

@@ -48,9 +48,9 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = Vector2.zero; // Stop the player when no input is detected
             animator.SetBool("isWalking", false);
-            if (animator.HasState(0, Animator.StringToHash("Idle_down")))
+            if (animator.HasState(0, Animator.StringToHash("idle_down")))
             {
-                animator.Play("Idle_down"); // Play idle animation when not moving
+                animator.Play("idle_down"); // Play idle animation when not moving
             }
         }
     }
@@ -59,20 +59,23 @@ public class PlayerController : MonoBehaviour
     {
         direction.Normalize();
 
+
+
         // Determine the speed based on whether the player is running
         float speed = isRunning ? runSpeed : walkSpeed;
 
         // Move the player with the specified speed using Rigidbody2D
         rb.velocity = direction * speed;
-
-        Debug.Log($"Moving in direction {direction}, running: {isRunning}");
     }
 
     void UpdateAnimation(Vector2 direction)
     {
         if (direction != Vector2.zero)
         {
-            animator.SetBool("isWalking", true);
+            if (!animator.GetBool("isWalking"))
+            {
+                animator.SetBool("isWalking", true);
+            }
             if (direction.x > 0)
             {
                 if (animator.HasState(0, Animator.StringToHash("walkRight")))
@@ -106,10 +109,13 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            animator.SetBool("isWalking", false);
-            if (animator.HasState(0, Animator.StringToHash("Idle_down")))
+            if (animator.GetBool("isWalking"))
             {
-                animator.Play("Idle_down"); // Play idle animation when not moving
+                animator.SetBool("isWalking", false);
+            }
+            if (animator.HasState(0, Animator.StringToHash("idle_down")))
+            {
+                animator.Play("idle_down"); // Play idle animation when not moving
             }
         }
     }

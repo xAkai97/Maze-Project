@@ -132,8 +132,7 @@ public class Pathfinding : MonoBehaviour
     private bool IsValidNeighbor(Vector2 neighborPos)
     {
         bool isValid = IsWithinGridBounds(neighborPos) &&
-                       cells.TryGetValue(neighborPos, out Cell c) && !searchedCells.Contains(neighborPos) &&
-                       !c.isWall; // Check if the cell is not a wall
+                       cells.TryGetValue(neighborPos, out Cell c) && !searchedCells.Contains(neighborPos);
 
         if (!isValid)
         {
@@ -186,7 +185,7 @@ public class Pathfinding : MonoBehaviour
         Vector2 roundedPosition = new Vector2(Mathf.Round(position.x), Mathf.Round(position.y));
         bool isValid = roundedPosition.x >= 0 && roundedPosition.x < GridWidth &&
                        roundedPosition.y >= 0 && roundedPosition.y < GridHeight &&
-                       cells.ContainsKey(roundedPosition) && !cells[roundedPosition].isWall; // Check if the cell is not a wall
+                       cells.ContainsKey(roundedPosition);
 
         if (!isValid)
         {

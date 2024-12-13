@@ -101,23 +101,3 @@ public class GridGenerator : MonoBehaviour
         return cells;
     }
 }
-
-public class Cell
-{
-    public Vector2 position;
-    public int gCost;
-    public int hCost;
-    public int fCost;
-    public Vector2 connection;
-    public bool isWall; // Add a flag to indicate if the cell is a wall
-
-    public Cell(Vector2 position)
-    {
-        this.position = position;
-        this.gCost = int.MaxValue;
-        this.hCost = 0;
-        this.fCost = int.MaxValue;
-        this.connection = Vector2.zero;
-        this.isWall = false; // Initialize as not a wall
-    }
-}

@@ -13,12 +13,25 @@ public class GameManager2D : MonoBehaviour
     public GameObject chest; // Reference to the chest
     public GameObject winText; // Reference to the "You Win" text UI element
     public float endGameDelay = 3f; // Delay before loading the next scene
+    public RespawnManager respawnManager; // Reference to the RespawnManager
 
     void Start()
     {
         pathfinding = FindObjectOfType<Pathfinding>();
         gridGenerator = FindObjectOfType<GridGenerator>();
         winText.SetActive(false); // Ensure the win text is hidden at the start
+
+        // Use RespawnManager to instantiate enemies
+        List<Transform> instantiatedEnemies = new List<Transform>();
+        foreach (Transform enemyTransform in enemies)
+        {
+            GameObject enemyInstance = respawnManager.RespawnEnemy();
+            if (enemyInstance != null)
+            {
+                instantiatedEnemies.Add(enemyInstance.transform);
+            }
+        }
+        enemies = instantiatedEnemies;
     }
 
     void Update()
@@ -97,6 +110,6 @@ public class GameManager2D : MonoBehaviour
 
     void ReturnToMainMenu()
     {
-        SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadScene("MainMenu"); // Replace "MainMenu" with the actual name of your main menu scene
     }
 }
