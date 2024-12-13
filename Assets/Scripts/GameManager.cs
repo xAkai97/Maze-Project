@@ -97,6 +97,6 @@ public class GameManager2D : MonoBehaviour
 
     void ReturnToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu"); // Replace "MainMenu" with the actual name of your main menu scene
+        SceneManager.LoadScene("Main Menu");
     }
 }

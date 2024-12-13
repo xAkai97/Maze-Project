@@ -255,7 +255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &320086966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,7 +453,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &681834471
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19393,7 +19393,7 @@ MonoBehaviour:
   - {fileID: 3404378848135310701}
   player: {fileID: 635174772}
   chest: {fileID: 1876565134}
-  winText: {fileID: 0}
+  winText: {fileID: 681834470}
   endGameDelay: 3
 --- !u!4 &1371584502
 Transform:
