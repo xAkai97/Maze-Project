@@ -27,6 +27,12 @@ public class GameManager2D : MonoBehaviour
         {
             StartPathfinding(currentEnemy);
         }
+
+        // Check for ESC key press to return to the main menu
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ReturnToMainMenu();
+        }
     }
 
     void StartPathfinding(Transform currentEnemy)
@@ -87,5 +93,10 @@ public class GameManager2D : MonoBehaviour
     {
         yield return new WaitForSeconds(endGameDelay);
         SceneManager.LoadScene("Lvl 1");
+    }
+
+    void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu"); // Replace "MainMenu" with the actual name of your main menu scene
     }
 }
